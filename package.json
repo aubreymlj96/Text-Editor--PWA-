@@ -1,0 +1,19 @@
+{
+  "name": "text-editor-pwa",
+  "version": "1.0.0",
+  "description": "Text Editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aubreymlj96/Text-Editor-PWA.git#main"
+  },
+  "author": "aubreymlj96",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aubreymlj96/Text-Editor-PWA/issues"
+  },
+  "homepage": "https://github.com/aubreymlj96/Text-Editor-PWA/tree/main#readme"
+}
