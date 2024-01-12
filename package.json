@@ -4,7 +4,10 @@
   "description": "Text Editor",
   "main": "index.js",
   "scripts": {
-    "test": "start"
+    "test": "start",
+    "start": "npm run build && cd server && node server.js",
+    "build": "webpack",
+    "start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\" "
   },
   "repository": {
     "type": "git",
