@@ -7,7 +7,7 @@
     "test": "start",
     "start": "npm run build && cd server && node server.js",
     "build": "webpack",
-    "start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\" "
+    "start:dev": "\"cd client && npm run build\" \"cd server && npm run server\" "
   },
   "repository": {
     "type": "git",
