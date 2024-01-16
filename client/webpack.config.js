@@ -1,17 +1,19 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const { MiniCssExtractPlugin } = require('css-loader');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 module.exports = {
     mode: 'development',
     entry: {
-        main: './src/js/index.js'
+        main: './src/js/index.js',
+        install: './src/js/install.js'
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     plugins:[
@@ -20,10 +22,19 @@ module.exports = {
             title: 'Text-Editor'
         }),
         new InjectManifest({
-            swSrc: './src/sw.js',
-            swDest 'service-worker.js',
+            swSrc: './src-sw.js',
+            swDest: 'service-worker.js',
         }),
-        new MiniCssExtractPlugin(),
+        // new MiniCssExtractPlugin(),
+        // new GenerateSW({
+        //     // runtimeCaching: [{
+        //     //     urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+        //     //     handler: 'CacheFirst',
+        //     //     options: {
+        //     //         cacheName: 'images'
+        //     //     }
+        //     // }]
+        // }),
         new WebpackPwaManifest({
             name: 'text-editor',
             short_name: 'Text-Editor',
@@ -34,9 +45,9 @@ module.exports = {
             publicPath: './',
             icons:[
                 {
-                src: path.resolve('./client/favicon.ico'),
+                src: path.resolve('src/images/logo.png'),
                 sizes: [96, 128, 192, 256, 384, 512],
-                destination: path.join('client', 'icons'),
+                destination: path.join('src', 'icons'),
                 }
             ]
         })
@@ -46,15 +57,15 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.css$/i,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.m?js$/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader', 
                     options: {
-                        presents: ['@babel/present-env'],
+                        presets: ['@babel/preset-env'],
                         plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
                     }}
             }
