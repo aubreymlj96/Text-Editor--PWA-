@@ -23,7 +23,7 @@ module.exports = {
         }),
         new InjectManifest({
             swSrc: './src-sw.js',
-            swDest: 'service-worker.js',
+            swDest: 'src-sw.js',
         }),
         // new MiniCssExtractPlugin(),
         // new GenerateSW({
@@ -41,13 +41,15 @@ module.exports = {
             description: 'Use this to edit',
             background_color: 'blue',
             theme_color: 'blue',
-            start_url: './',
-            publicPath: './',
+            start_url: '/',
+            publicPath: '/',
+            fingerprints: false,
+            inject: true,
             icons:[
                 {
                 src: path.resolve('src/images/logo.png'),
                 sizes: [96, 128, 192, 256, 384, 512],
-                destination: path.join('src', 'icons'),
+                destination: path.join('assets', 'icons'),
                 }
             ]
         })
